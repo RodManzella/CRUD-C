@@ -14,6 +14,18 @@ typedef struct{
     int numero_de_chamada; // uma numeração conhecida como número de chamada, que é composta por uma numração que identifica o assunto e o autor
 } ficha_catalografica;
 
+
+void abrir_arquivo_txt(){
+
+}
+
+void cadastrar_o_livro(){
+
+}
+
+
+
+
 int main(){
     int escolha;
 
