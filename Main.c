@@ -20,8 +20,10 @@ int main(){
     // do - while para realizar a execução pelo menos uma vez
     do{
         printf("\n\n\n Escolha uma das opções abaixo: \n\n\n");
-        printf(" 1- Cadastrar um novo livro \n\n");
-
+        printf(" Digite 1 para: Cadastrar um novo livro \n\n");
+        printf(" Digite 2 para: Remover um livro \n\n");
+        printf(" Digite 3 para: Consultar um livro pelo número exemplar \n\n"); //acredito que seja pelo ID 
+        printf(" Digite -1 para: Sair\n\n");
     }while(escolha != -1);
     return 0;
 }
