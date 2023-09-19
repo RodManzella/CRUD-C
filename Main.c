@@ -15,6 +15,13 @@ typedef struct{
 } ficha_catalografica;
 
 int main(){
+    int escolha;
 
+    // do - while para realizar a execução pelo menos uma vez
+    do{
+        printf("\n\n\n Escolha uma das opções abaixo: \n\n\n");
+        printf(" 1- Cadastrar um novo livro \n\n");
+
+    }while(escolha != -1);
     return 0;
 }
