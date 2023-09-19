@@ -14,17 +14,39 @@ typedef struct{
     int numero_de_chamada; // uma numeração conhecida como número de chamada, que é composta por uma numração que identifica o assunto e o autor
 } ficha_catalografica;
 
+FILE *arquivo; //FILE -> tipo de dado(definido pela biblioteca padrão do C -> stdio.h)usado para manipular arquivo e arquivo é uma variavel que é um ponteiro que armazena o endereço de memória de uma estrutura do tipo FILE
 
 void abrir_arquivo_txt(){
-
+    //
 }
 
 void cadastrar_o_livro(){
 
 }
 
+// int procura_Livro(int numero_de_exemplar_do_livro){
 
+//}
 
+//void mostre(int parametro){  // ver qual é o parametro adaptado
+
+//}
+
+void consultar_livro(){
+
+}
+
+void remover_livro(){
+
+}
+
+void listagem(){
+
+}
+
+void alterar(){
+    
+}
 
 int main(){
     int escolha;
