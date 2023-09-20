@@ -174,7 +174,7 @@ int main(){
               consultar_livro();
               break;
             case 4:
-              listagem();
+              listarLivros();
               break;
             case -1:
               fclose(arquivo);
