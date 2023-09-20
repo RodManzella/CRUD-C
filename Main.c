@@ -3,7 +3,7 @@
 
 //o conjunto desses dados vai direcionar o usuário até o livro na estante
 typedef struct{
-    char nome_do_autor[20]
+    char nome_do_autor[20];
     char titulo_do_livro[20];
     char local_de_publicacao[20]; //onde o livro foi publicado
     char editora_do_livro[20]; 
@@ -46,8 +46,23 @@ void remover_livro(){
 
 }
 
-void listagem(){
+//void listagem(){
 
+//}
+
+void listarLivros(ficha_catalografica livros[], int numLivros) {
+    printf("Lista de Livros Cadastrados:\n");
+    for (int i = 0; i < numLivros; i++) {
+        printf("Livro %d:\n", i + 1);
+        printf("Autor: %s\n", livros[i].nome_do_autor);
+        printf("Título: %s\n", livros[i].titulo_do_livro);
+	      printf("Local de Publicação: %d\n", livros[i].local_de_publicação);
+        printf("Editora: %d\n", livros[i].editora_do_livro);
+	      printf("Ano de Publicação: %d\n", livros[i].ano_do_livro);
+	      printf("Número de Páginas: %d\n", livros[i].paginacao);
+	      printf("Número de Exemplar: %d\n", livros[i].numero_de_exemplar_do_livro);
+	      printf("Número de Chamada: %d\n", livros[i].numero_de_chamada);
+    }
 }
 
 void alterar(int estoque){ // alterar o estoque
