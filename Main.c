@@ -37,6 +37,17 @@ void cadastrar_o_livro(){
 //void mostre(int parametro){  // ver qual é o parametro adaptado
 
 //}
+void mostrarLivro(Ficha_Catalografica idlivro) {
+    printf("Dados do Livro:\n");
+    printf("Autor: %s\n", idlivro.nome_do_autor);
+    printf("Título: %s\n", idlivro.titulo_do_livro);
+    printf("Local de Publicação: %s\n", idlivro.local_de_publicacao);
+    printf("Editora: %s\n", idlivro.editora_do_livro);
+    printf("Ano de Publicação: %d\n", idlivro.ano_do_livro);
+    printf("Número de Páginas: %d\n", idlivro.paginacao);
+    printf("Número de Exemplar: %d\n", idlivro.numero_de_exemplar_do_livro);
+    printf("Número de Chamada: %d\n", idlivro.numero_de_chamada);
+}
 
 void consultar_livro(){
 
