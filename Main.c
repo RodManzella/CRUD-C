@@ -23,8 +23,8 @@ Ficha_Catalografica dados_livro, livro_null; // dados_livro -> é usada para arm
 void abrir_arquivo_txt(){
     arquivo = fopen("livros.txt","r+b");
     if(arquivo == NULL){
-      //arquivo = fopen("livros.txt", "w+b"); -> para a primeira vez rodando
-        printf("Erro!");
+      arquivo = fopen("livros.txt", "w+b"); //-> para a primeira vez rodando
+        //printf("Erro!");
     }
 }
 
@@ -71,7 +71,12 @@ void cadastrar_o_livro() {
     printf("Digite o número de chamada: ");
     scanf("%d", &dados_livro.numero_de_chamada);
 
-    printf("Voce quer fazer um novo cadastro? Digite 1 para não, ou digite 2 para sim");
+      fseek(arquivo, 0, SEEK_END);
+        fwrite(&dados_livro, sizeof(Ficha_Catalografica), 1, arquivo);
+
+        printf("Cadastro concluído com sucesso!\n");
+
+    printf("Voce quer fazer um novo cadastro? Digite 1 para não, ou digite 2 para sim: ");
     scanf("%d", &x);
   } while (x != 1);
 }
@@ -104,27 +109,6 @@ void consultar_livro(){
 void remover_livro(){
 
 }
-
-//void listarLivros(){
-
-//}
-
-/*void listarLivros() {
-    printf("Lista de Livros Cadastrados:\n");
-    //for (int i = 0; i < numLivros; i++) {
-        while(arquivo != NULL){
-          //printf("Livro %d:\n", i + 1);
-        printf("Autor: %s\n", dados_livro.nome_do_autor);
-        printf("Título: %s\n", dados_livro.titulo_do_livro);
-	      printf("Local de Publicação: %d\n", dados_livro.local_de_publicacao);
-        printf("Editora: %d\n", dados_livro.editora_do_livro);
-	      printf("Ano de Publicação: %d\n", dados_livro.ano_do_livro);
-	      printf("Número de Páginas: %d\n", dados_livro.paginacao);
-	      printf("Número de Exemplar: %d\n", dados_livro.numero_de_exemplar_do_livro);
-	      printf("Número de Chamada: %d\n", dados_livro.numero_de_chamada);
-        }
-    //}
-}*/
 
 void listarLivros() {
     printf("Lista de Livros Cadastrados:\n");
