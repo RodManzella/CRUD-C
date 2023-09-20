@@ -71,7 +71,7 @@ void cadastrar_o_livro() {
     printf("Digite o número de chamada: ");
     scanf("%d", &dados_livro.numero_de_chamada);
 
-    printf("Voce quer fazer um novo cadastro?");
+    printf("Voce quer fazer um novo cadastro? Digite 1 para não, ou digite 2 para sim");
     scanf("%d", &x);
   } while (x != 1);
 }
@@ -105,24 +105,52 @@ void remover_livro(){
 
 }
 
-void listarLivros(){
+//void listarLivros(){
 
+//}
+
+/*void listarLivros() {
+    printf("Lista de Livros Cadastrados:\n");
+    //for (int i = 0; i < numLivros; i++) {
+        while(arquivo != NULL){
+          //printf("Livro %d:\n", i + 1);
+        printf("Autor: %s\n", dados_livro.nome_do_autor);
+        printf("Título: %s\n", dados_livro.titulo_do_livro);
+	      printf("Local de Publicação: %d\n", dados_livro.local_de_publicacao);
+        printf("Editora: %d\n", dados_livro.editora_do_livro);
+	      printf("Ano de Publicação: %d\n", dados_livro.ano_do_livro);
+	      printf("Número de Páginas: %d\n", dados_livro.paginacao);
+	      printf("Número de Exemplar: %d\n", dados_livro.numero_de_exemplar_do_livro);
+	      printf("Número de Chamada: %d\n", dados_livro.numero_de_chamada);
+        }
+    //}
+}*/
+
+void listarLivros() {
+    printf("Lista de Livros Cadastrados:\n");
+
+    // Variável temporária para ler os registros do arquivo
+    //Ficha_Catalografica livro_temp;
+
+    // Voltar ao início do arquivo
+    fseek(arquivo, 0, SEEK_SET);
+
+    // Ler e listar os livros enquanto o arquivo não chegar ao fim
+ // Para listar os livros corretamente, ler os registros do arquivo usando a função fread() e verificar o final do arquivo (feof()) para determinar quando parar de listar os livros. 
+    while (fread(&dados_livro, sizeof(Ficha_Catalografica), 1, arquivo) == 1) {
+        printf("Autor: %s\n", dados_livro.nome_do_autor);
+        printf("Título: %s\n", dados_livro.titulo_do_livro);
+        printf("Local de Publicação: %s\n", dados_livro.local_de_publicacao);
+        printf("Editora: %s\n", dados_livro.editora_do_livro);
+      
+ printf("Ano do livro: %d\n",dados_livro.ano_do_livro);
+        printf("Número de Páginas: %d\n", dados_livro.paginacao);
+        printf("Número de Exemplar: %d\n", dados_livro.numero_de_exemplar_do_livro);
+        printf("Número de Chamada: %d\n", dados_livro.numero_de_chamada);
+        printf("\n"); // Separar cada livro com uma linha em branco
+    }
 }
 
-/*void listarLivros(Ficha_Catalografica livros[], int numLivros) {
-    printf("Lista de Livros Cadastrados:\n");
-    for (int i = 0; i < numLivros; i++) {
-        printf("Livro %d:\n", i + 1);
-        printf("Autor: %s\n", livros[i].nome_do_autor);
-        printf("Título: %s\n", livros[i].titulo_do_livro);
-	      printf("Local de Publicação: %d\n", livros[i].local_de_publicacao);
-        printf("Editora: %d\n", livros[i].editora_do_livro);
-	      printf("Ano de Publicação: %d\n", livros[i].ano_do_livro);
-	      printf("Número de Páginas: %d\n", livros[i].paginacao);
-	      printf("Número de Exemplar: %d\n", livros[i].numero_de_exemplar_do_livro);
-	      printf("Número de Chamada: %d\n", livros[i].numero_de_chamada);
-    }
-}*/
 
 //void alterar(int estoque){ // alterar o estoque
 
