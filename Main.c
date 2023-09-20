@@ -67,8 +67,9 @@ void cadastrar_o_livro() {
     //scanf("%s", &dados_livro.editora_do_livro);
 
     printf("Digite o ano do livro: ");
-    scanf("%d", &dados_livro.ano_do_livro);
-
+    
+    gets("%d", &dados_livro.ano_do_livro);
+    getchar();
     printf("Digite o número de páginas: ");
     scanf("%d", &dados_livro.paginacao);
 
@@ -92,9 +93,6 @@ void cadastrar_o_livro() {
   } while (x != 1);
 }
 
-// int procura_Livro(int numero_de_exemplar_do_livro){
-
-//}
 int procura_Livro(int numero_de_exemplar_do_livro){
 	
 	int p;
@@ -103,7 +101,7 @@ int procura_Livro(int numero_de_exemplar_do_livro){
 	fread(&dados_livro, sizeof(Ficha_Catalografica), 1,arquivo);
 	
 	while(feof(arquivo) == 0){
-		if(dados_livro.numero_de_exemplar_do_livro == arquivo){
+		if(dados_livro.numero_de_exemplar_do_livro == numero_de_exemplar_do_livro){
 
 			return p;
 		}
