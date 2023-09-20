@@ -66,8 +66,28 @@ int main(){
 
         scanf("%d", &escolha);
 
-
+        switch(escolha){
+            case 1:
+              cadastrar_o_livro();
+              break;
+            case 2:
+              remover_livro();
+              break;
+            case 3:   
+              consultar_livro();
+              break;
+            case 4:
+              listagem();
+              break;
+            case -1:
+              fclose(arquivo);
+              break;
+            default:
+              printf("\n\n\a Digite uma opção válida");
+              break;
+        }
 
     }while(escolha != -1);
+
     return 0;
 }
