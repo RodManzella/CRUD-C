@@ -28,6 +28,13 @@ void abrir_arquivo_txt(){
     }
 }
 
+void linha() {
+  int i;
+
+  for (i = 1; i <= 50; i++)
+    printf("_");
+}
+
 void cadastrar_o_livro() {
   int x;
   do
@@ -38,7 +45,7 @@ void cadastrar_o_livro() {
 
     printf("Digite o nome do autor: ");
     getchar();
-    fgets(dados_livro.nome_do_autor, sizeof(dados_livro.nome_do_autor), stdin);
+    gets(dados_livro.nome_do_autor, sizeof(dados_livro.nome_do_autor), stdin);
     //scanf("%s", &dados_livro.nome_do_autor);
 
     /*printf("Digite o sobrenome do autor: ");
@@ -46,17 +53,17 @@ void cadastrar_o_livro() {
 
     printf("Digite o título do livro: ");
      getchar();
-    fgets(dados_livro.titulo_do_livro,     sizeof(dados_livro.titulo_do_livro), stdin);
+    gets(dados_livro.titulo_do_livro,     sizeof(dados_livro.titulo_do_livro), stdin);
     //scanf("%s", &dados_livro.titulo_do_livro);
     
     printf("Digite o local de publicacao: ");
      getchar();
-    fgets(dados_livro.local_de_publicacao,     sizeof(dados_livro.local_de_publicacao), stdin);
+    gets(dados_livro.local_de_publicacao,     sizeof(dados_livro.local_de_publicacao), stdin);
     //scanf("%s", &dados_livro.local_de_publicacao);
 
     printf("Digite a editora do livro: ");
      getchar();
-    fgets(dados_livro.editora_do_livro,     sizeof(dados_livro.editora_do_livro), stdin);
+    gets(dados_livro.editora_do_livro,     sizeof(dados_livro.editora_do_livro), stdin);
     //scanf("%s", &dados_livro.editora_do_livro);
 
     printf("Digite o ano do livro: ");
@@ -71,6 +78,10 @@ void cadastrar_o_livro() {
     printf("Digite o número de chamada: ");
     scanf("%d", &dados_livro.numero_de_chamada);
 
+    printf("Digite o estoque: ");
+    scanf("%d", &dados_livro.estoque);
+    
+
       fseek(arquivo, 0, SEEK_END);
         fwrite(&dados_livro, sizeof(Ficha_Catalografica), 1, arquivo);
 
@@ -84,33 +95,80 @@ void cadastrar_o_livro() {
 // int procura_Livro(int numero_de_exemplar_do_livro){
 
 //}
+int procura_Livro(int numero_de_exemplar_do_livro){
+	
+	int p;
+	p = 0;
+	rewind(arquivo);
+	fread(&dados_livro, sizeof(Ficha_Catalografica), 1,arquivo);
+	
+	while(feof(arquivo) == 0){
+		if(dados_livro.numero_de_exemplar_do_livro == arquivo){
 
-//void mostre(int parametro){  // ver qual é o parametro adaptado
+			return p;
+		}
+		else{
+			fread(&dados_livro, sizeof(Ficha_Catalografica), 1, arquivo);
+			p++;
+		}
+	}
+	return -1;
+}
 
-//}
-
-
-/*void mostrarLivro(Ficha_Catalografica idlivro) {
+// só é chamado quando o remover é solicitado
+void mostrarLivro(int pos) {
+   fseek(arquivo, pos * sizeof(Ficha_Catalografica), SEEK_SET); //direciona
+  fread(&dados_livro, sizeof(Ficha_Catalografica), 1, arquivo);
     printf("Dados do Livro:\n");
-    printf("Autor: %s\n", idlivro.nome_do_autor);
-    printf("Título: %s\n", idlivro.titulo_do_livro);
-    printf("Local de Publicação: %s\n", idlivro.local_de_publicacao);
-    printf("Editora: %s\n", idlivro.editora_do_livro);
-    printf("Ano de Publicação: %d\n", idlivro.ano_do_livro);
-    printf("Número de Páginas: %d\n", idlivro.paginacao);
-    printf("Número de Exemplar: %d\n", idlivro.numero_de_exemplar_do_livro);
-    printf("Número de Chamada: %d\n", idlivro.numero_de_chamada);
-}*/
+    printf("Autor: %s\n", dados_livro.nome_do_autor);
+    printf("Título: %s\n", dados_livro.titulo_do_livro);
+    printf("Local de Publicação: %s\n", dados_livro.local_de_publicacao);
+    printf("Editora: %s\n", dados_livro.editora_do_livro);
+    printf("Ano de Publicação: %d\n", dados_livro.ano_do_livro);
+    printf("Número de Páginas: %d\n", dados_livro.paginacao);
+    printf("Número de Exemplar: %d\n", dados_livro.numero_de_exemplar_do_livro);
+    printf("Número de Chamada: %d\n", dados_livro.numero_de_chamada);
+}
 
 void consultar_livro(){
 
 }
 
-void remover_livro(){
+void remover_livro() {
+    int numero_de_exemplar_do_livro, escolha, resp, posicao;
+    //Ficha_Catalografica livro_nulo;
+    memset(&livro_null, 0, sizeof(Ficha_Catalografica)); // Inicializa a estrutura com zeros
 
+    do {
+        printf("\n\nRemover livro\n\n\n");
+        printf("Digite o número de exemplar do livro desejado: ");
+        scanf("%d", &numero_de_exemplar_do_livro);
+        posicao = procura_Livro(numero_de_exemplar_do_livro);
+
+        if (posicao == -1) {
+            printf("\nLivro não encontrado!\a");
+        } else {
+            //listarLivros(arquivo); // Exibe o livro antes de remover
+            mostrarLivro(posicao);
+            printf("\n\nDeseja remover o livro (1-sim/0-não)? ");
+            scanf("%d", &escolha);
+            if (escolha == 1) {
+                fseek(arquivo, posicao * sizeof(Ficha_Catalografica), SEEK_SET); //direciona
+                fwrite(&livro_null, sizeof(Ficha_Catalografica), 1, arquivo); //e seta escrevendo naquela posição como nulo, ou seja, removido
+                printf("\n\nLivro removido com sucesso!");
+            } else {
+                printf("\nRemoção cancelada!");
+            }
+        }
+
+        printf("\n\n\nDeseja remover outro (1-sim/0-não)? ");
+        scanf("%d", &resp);
+    } while (resp == 1);
 }
 
+
 void listarLivros() {
+  printf("\n\n");
     printf("Lista de Livros Cadastrados:\n");
 
     // Variável temporária para ler os registros do arquivo
@@ -131,7 +189,10 @@ void listarLivros() {
         printf("Número de Páginas: %d\n", dados_livro.paginacao);
         printf("Número de Exemplar: %d\n", dados_livro.numero_de_exemplar_do_livro);
         printf("Número de Chamada: %d\n", dados_livro.numero_de_chamada);
+      printf("Estoque: %d\n", dados_livro.estoque);
+      
         printf("\n"); // Separar cada livro com uma linha em branco
+      linha();
     }
 }
 
