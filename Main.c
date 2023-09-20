@@ -12,6 +12,7 @@ typedef struct{
     int numero_de_exemplar_do_livro; // cada livro recebe um número de exemplar que é como se fosse a identidade dele
    // char categoria_do_livro[20]; -> pelo que vi na ficha catalográfica lá nao precisaria disso assim
     int numero_de_chamada; // uma numeração conhecida como número de chamada, que é composta por uma numração que identifica o assunto e o autor
+    int estoque; // quantos livros vão ser cadastrados
 } ficha_catalografica;
 
 FILE *arquivo; //FILE -> tipo de dado(definido pela biblioteca padrão do C -> stdio.h)usado para manipular arquivo e arquivo é uma variavel que é um ponteiro que armazena o endereço de memória de uma estrutura do tipo FILE
@@ -44,7 +45,7 @@ void listagem(){
 
 }
 
-void alterar(){
+void alterar(int estoque){ // alterar o estoque
 
 }
 
@@ -62,7 +63,7 @@ int main(){
 
         scanf("%d", &escolha);
 
-        
+
 
     }while(escolha != -1);
     return 0;
