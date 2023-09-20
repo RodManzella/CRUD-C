@@ -13,9 +13,11 @@ typedef struct{
    // char categoria_do_livro[20]; -> pelo que vi na ficha catalográfica lá nao precisaria disso assim
     int numero_de_chamada; // uma numeração conhecida como número de chamada, que é composta por uma numração que identifica o assunto e o autor
     int estoque; // quantos livros vão ser cadastrados
-} ficha_catalografica;
+} Ficha_Catalografica;
 
 FILE *arquivo; //FILE -> tipo de dado(definido pela biblioteca padrão do C -> stdio.h)usado para manipular arquivo e arquivo é uma variavel que é um ponteiro que armazena o endereço de memória de uma estrutura do tipo FILE
+
+Ficha_Catalografica dados_livro, livro_null; // dados_livro -> é usada para armazenar temporariamente dados de livros durante operações como inserção, consulta e alteração. livro_null -> é usada para representar livros removidos no arquivo, permitindo que o programa marque alunos que foram excluídos sem a necessidade de excluir fisicamente seus registros do arquivo, portanto ele tem informações vazias.
 
 void abrir_arquivo_txt(){
     arquivo = fopen("livros.txt","r");
