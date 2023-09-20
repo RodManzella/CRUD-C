@@ -18,7 +18,10 @@ typedef struct{
 FILE *arquivo; //FILE -> tipo de dado(definido pela biblioteca padrão do C -> stdio.h)usado para manipular arquivo e arquivo é uma variavel que é um ponteiro que armazena o endereço de memória de uma estrutura do tipo FILE
 
 void abrir_arquivo_txt(){
-    //
+    arquivo = fopen("livros.txt","r");
+    if(arquivo == NULL){
+        printf("Erro!");
+    }
 }
 
 void cadastrar_o_livro(){
