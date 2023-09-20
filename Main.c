@@ -26,8 +26,38 @@ void abrir_arquivo_txt(){
     }
 }
 
-void cadastrar_o_livro(){
+void cadastrar_o_livro() {
+  int x;
+  do
+  {
+    printf("--CADASTRO DE LIVRO--");
+    printf("Digite o nome do autor: ");
+    scanf("%s", &dados_livro.nome_do_autor);
 
+    printf("Digite o título do livro: ");
+    scanf("%s", &dados_livro.titulo_do_livro);
+
+    printf("Digite o local de publicacao: ");
+    scanf("%s", &dados_livro.local_de_publicacao);
+
+    printf("Digite a editora do livro: ");
+    scanf("%s", &dados_livro.editora_do_livro);
+
+    printf("Digite o ano do livro: ");
+    scanf("%d", &dados_livro.ano_do_livro);
+
+    printf("Digite o número de páginas: ");
+    scanf("%d", &dados_livro.paginacao);
+
+    printf("Digite o número de exemplar: ");
+    scanf("%d", &dados_livro.numero_de_exemplar_do_livro);
+
+    printf("Digite o número de chamada: ");
+    scanf("%d", &dados_livro.numero_de_chamada);
+
+    printf("Voce quer fazer um novo cadastro?");
+    scanf("%d", &x);
+  } while (x != 1);
 }
 
 // int procura_Livro(int numero_de_exemplar_do_livro){
