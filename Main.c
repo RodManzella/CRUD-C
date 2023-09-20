@@ -4,8 +4,9 @@
 //o conjunto desses dados vai direcionar o usuário até o livro na estante
 typedef struct{
     char nome_do_autor[20];
+    //char sobrenome_do_autor[20]; // p conciliar diante do problema do gets
     char titulo_do_livro[20];
-    char local_de_publicacao[20]; //onde o livro foi publicado
+    char local_de_publicacao[20]; //onde o livro foi publicado -lugar geográfico-
     char editora_do_livro[20]; 
     int ano_do_livro;
     int paginacao; // quantas páginas o livro tem
@@ -20,8 +21,9 @@ FILE *arquivo; //FILE -> tipo de dado(definido pela biblioteca padrão do C -> s
 Ficha_Catalografica dados_livro, livro_null; // dados_livro -> é usada para armazenar temporariamente dados de livros durante operações como inserção, consulta e alteração. livro_null -> é usada para representar livros removidos no arquivo, permitindo que o programa marque alunos que foram excluídos sem a necessidade de excluir fisicamente seus registros do arquivo, portanto ele tem informações vazias.
 
 void abrir_arquivo_txt(){
-    arquivo = fopen("livros.txt","r");
+    arquivo = fopen("livros.txt","r+b");
     if(arquivo == NULL){
+      //arquivo = fopen("livros.txt", "w+b"); -> para a primeira vez rodando
         printf("Erro!");
     }
 }
@@ -31,17 +33,31 @@ void cadastrar_o_livro() {
   do
   {
     printf("--CADASTRO DE LIVRO--");
+    /*printf("Digite o nome do autor: ");
+    scanf("%s", &dados_livro.nome_do_autor);*/
+
     printf("Digite o nome do autor: ");
-    scanf("%s", &dados_livro.nome_do_autor);
+    getchar();
+    fgets(dados_livro.nome_do_autor, sizeof(dados_livro.nome_do_autor), stdin);
+    //scanf("%s", &dados_livro.nome_do_autor);
+
+    /*printf("Digite o sobrenome do autor: ");
+    scanf("%s", &dados_livro.sobrenome_do_autor);*/
 
     printf("Digite o título do livro: ");
-    scanf("%s", &dados_livro.titulo_do_livro);
-
+     getchar();
+    fgets(dados_livro.titulo_do_livro,     sizeof(dados_livro.titulo_do_livro), stdin);
+    //scanf("%s", &dados_livro.titulo_do_livro);
+    
     printf("Digite o local de publicacao: ");
-    scanf("%s", &dados_livro.local_de_publicacao);
+     getchar();
+    fgets(dados_livro.local_de_publicacao,     sizeof(dados_livro.local_de_publicacao), stdin);
+    //scanf("%s", &dados_livro.local_de_publicacao);
 
     printf("Digite a editora do livro: ");
-    scanf("%s", &dados_livro.editora_do_livro);
+     getchar();
+    fgets(dados_livro.editora_do_livro,     sizeof(dados_livro.editora_do_livro), stdin);
+    //scanf("%s", &dados_livro.editora_do_livro);
 
     printf("Digite o ano do livro: ");
     scanf("%d", &dados_livro.ano_do_livro);
@@ -69,7 +85,7 @@ void cadastrar_o_livro() {
 //}
 
 
-void mostrarLivro(Ficha_Catalografica idlivro) {
+/*void mostrarLivro(Ficha_Catalografica idlivro) {
     printf("Dados do Livro:\n");
     printf("Autor: %s\n", idlivro.nome_do_autor);
     printf("Título: %s\n", idlivro.titulo_do_livro);
@@ -79,7 +95,7 @@ void mostrarLivro(Ficha_Catalografica idlivro) {
     printf("Número de Páginas: %d\n", idlivro.paginacao);
     printf("Número de Exemplar: %d\n", idlivro.numero_de_exemplar_do_livro);
     printf("Número de Chamada: %d\n", idlivro.numero_de_chamada);
-}
+}*/
 
 void consultar_livro(){
 
@@ -89,29 +105,29 @@ void remover_livro(){
 
 }
 
-//void listagem(){
+void listarLivros(){
 
-//}
+}
 
-void listarLivros(ficha_catalografica livros[], int numLivros) {
+/*void listarLivros(Ficha_Catalografica livros[], int numLivros) {
     printf("Lista de Livros Cadastrados:\n");
     for (int i = 0; i < numLivros; i++) {
         printf("Livro %d:\n", i + 1);
         printf("Autor: %s\n", livros[i].nome_do_autor);
         printf("Título: %s\n", livros[i].titulo_do_livro);
-	      printf("Local de Publicação: %d\n", livros[i].local_de_publicação);
+	      printf("Local de Publicação: %d\n", livros[i].local_de_publicacao);
         printf("Editora: %d\n", livros[i].editora_do_livro);
 	      printf("Ano de Publicação: %d\n", livros[i].ano_do_livro);
 	      printf("Número de Páginas: %d\n", livros[i].paginacao);
 	      printf("Número de Exemplar: %d\n", livros[i].numero_de_exemplar_do_livro);
 	      printf("Número de Chamada: %d\n", livros[i].numero_de_chamada);
     }
-}
+}*/
 
 //void alterar(int estoque){ // alterar o estoque
 
 //}
-void alterar() // alterar o estoque
+/*void alterar() // alterar o estoque
 {
   int etqAlt, conf, resp, posicao;
 
@@ -131,10 +147,10 @@ void alterar() // alterar o estoque
 
       if(conf == 1){
         printf("\nNovo estoque: ");
-        scanf("%f", &livro_aux.estoque);
+        scanf("%f", &dados_livro.estoque);
         printf("\nEstoque alterado com sucesso!\n\n");
-        fseek(arquivo, posicao*sizeof(ficha_catalografica), SEEK_SET);
-        fwrite(&livro_aux,sizeof(ficha_catalografica), 1, arquivo);
+        fseek(arquivo, posicao*sizeof(Ficha_Catalografica), SEEK_SET);
+        fwrite(&dados_livro,sizeof(Ficha_Catalografica), 1, arquivo);
         mostre(posicao);
         printf("\nEstoque do livro alterado com sucesso!\n");
       }
@@ -147,7 +163,7 @@ void alterar() // alterar o estoque
     scanf("%d", &resp);
 
   } while (resp == 1);
-}
+}*/
 
 int main(){
     int escolha;
