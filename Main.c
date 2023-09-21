@@ -95,9 +95,6 @@ void cadastrar_o_livro() {
   } while (x != 1);
 }
 
-// int procura_Livro(int numero_de_exemplar_do_livro){
-
-//}
 int procura_Livro(int numero_de_exemplar_do_livro){
 	
 	int p;
@@ -171,7 +168,7 @@ void remover_livro() {
 
 
 void listarLivros() {
-
+    int cont = 1;
     printf("Lista de Livros Cadastrados:\n");
 
     // Variável temporária para ler os registros do arquivo
@@ -184,7 +181,8 @@ void listarLivros() {
  // Para listar os livros corretamente, ler os registros do arquivo usando a função fread() e verificar o final do arquivo (feof()) para determinar quando parar de listar os livros. 
     while (fread(&dados_livro, sizeof(Ficha_Catalografica), 1, arquivo) == 1) {
       printf("\n\n");
-        printf("Autor: %s\n", dados_livro.nome_do_autor);
+      printf("Livro %d\n", cont);
+        printf("Autor: %s", dados_livro.nome_do_autor);
         printf("Título: %s\n", dados_livro.titulo_do_livro);
         printf("Local de Publicação: %s\n", dados_livro.local_de_publicacao);
         printf("Editora: %s\n", dados_livro.editora_do_livro);
@@ -197,6 +195,7 @@ void listarLivros() {
       
         printf("\n"); // Separar cada livro com uma linha em branco
       linha();
+     cont++;
     }
 }
 
