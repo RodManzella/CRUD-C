@@ -30,7 +30,7 @@ void abrir_arquivo_txt(){
 
 void linha() {
   int i;
-
+  
   for (i = 1; i <= 50; i++)
     printf("_");
 }
@@ -45,31 +45,33 @@ void cadastrar_o_livro() {
 
     printf("Digite o nome do autor: ");
     getchar();
-    gets(dados_livro.nome_do_autor, sizeof(dados_livro.nome_do_autor), stdin);
+    fgets(dados_livro.nome_do_autor, sizeof(dados_livro.nome_do_autor), stdin);
     //scanf("%s", &dados_livro.nome_do_autor);
 
     /*printf("Digite o sobrenome do autor: ");
     scanf("%s", &dados_livro.sobrenome_do_autor);*/
 
     printf("Digite o título do livro: ");
-     getchar();
+    //getchar();
     gets(dados_livro.titulo_do_livro,     sizeof(dados_livro.titulo_do_livro), stdin);
+    fflush(stdin);
     //scanf("%s", &dados_livro.titulo_do_livro);
     
     printf("Digite o local de publicacao: ");
-     getchar();
+     //getchar();
+    fflush(stdin);
     gets(dados_livro.local_de_publicacao,     sizeof(dados_livro.local_de_publicacao), stdin);
     //scanf("%s", &dados_livro.local_de_publicacao);
 
     printf("Digite a editora do livro: ");
-     getchar();
+    // getchar();
+    fflush(stdin);
     gets(dados_livro.editora_do_livro,     sizeof(dados_livro.editora_do_livro), stdin);
     //scanf("%s", &dados_livro.editora_do_livro);
 
     printf("Digite o ano do livro: ");
-    
-    gets("%d", &dados_livro.ano_do_livro);
-    getchar();
+    scanf("%d", &dados_livro.ano_do_livro);
+   
     printf("Digite o número de páginas: ");
     scanf("%d", &dados_livro.paginacao);
 
@@ -93,6 +95,9 @@ void cadastrar_o_livro() {
   } while (x != 1);
 }
 
+// int procura_Livro(int numero_de_exemplar_do_livro){
+
+//}
 int procura_Livro(int numero_de_exemplar_do_livro){
 	
 	int p;
@@ -166,7 +171,7 @@ void remover_livro() {
 
 
 void listarLivros() {
-  printf("\n\n");
+
     printf("Lista de Livros Cadastrados:\n");
 
     // Variável temporária para ler os registros do arquivo
@@ -178,6 +183,7 @@ void listarLivros() {
     // Ler e listar os livros enquanto o arquivo não chegar ao fim
  // Para listar os livros corretamente, ler os registros do arquivo usando a função fread() e verificar o final do arquivo (feof()) para determinar quando parar de listar os livros. 
     while (fread(&dados_livro, sizeof(Ficha_Catalografica), 1, arquivo) == 1) {
+      printf("\n\n");
         printf("Autor: %s\n", dados_livro.nome_do_autor);
         printf("Título: %s\n", dados_livro.titulo_do_livro);
         printf("Local de Publicação: %s\n", dados_livro.local_de_publicacao);
