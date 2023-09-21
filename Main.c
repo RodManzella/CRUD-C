@@ -120,7 +120,7 @@ void mostrarLivro(int pos) {
    fseek(arquivo, pos * sizeof(Ficha_Catalografica), SEEK_SET); //direciona
   fread(&dados_livro, sizeof(Ficha_Catalografica), 1, arquivo);
     printf("Dados do Livro:\n");
-    printf("Autor: %s\n", dados_livro.nome_do_autor);
+    printf("Autor: %s", dados_livro.nome_do_autor);
     printf("Título: %s\n", dados_livro.titulo_do_livro);
     printf("Local de Publicação: %s\n", dados_livro.local_de_publicacao);
     printf("Editora: %s\n", dados_livro.editora_do_livro);
@@ -128,12 +128,25 @@ void mostrarLivro(int pos) {
     printf("Número de Páginas: %d\n", dados_livro.paginacao);
     printf("Número de Exemplar: %d\n", dados_livro.numero_de_exemplar_do_livro);
     printf("Número de Chamada: %d\n", dados_livro.numero_de_chamada);
+    printf("Estoque: %d\n", dados_livro.estoque);
 }
 
 void consultar_livro(){
-
+    int num, escolha;
+    do{
+      printf("Digite o número de exemplar: ");
+      scanf("%d", &num);
+      int var = procura_Livro(num);
+      if(var == -1){
+        printf("Livro não encontrado!");
+      }
+      else{
+          mostrarLivro(var);
+      }
+      printf("\n\n\nDeseja consultar outro livro (1-não/2-sim)? ");
+          scanf("%d", &escolha);
+  }while(escolha != 1);
 }
-
 void remover_livro() {
     int numero_de_exemplar_do_livro, escolha, resp, posicao;
     //Ficha_Catalografica livro_nulo;
@@ -203,13 +216,13 @@ void listarLivros() {
 //void alterar(int estoque){ // alterar o estoque
 
 //}
-/*void alterar() // alterar o estoque
+void alterar_livro() // alterar o estoque 
 {
   int etqAlt, conf, resp, posicao;
 
   do {
-    printf("\n\nAlterar estoque do livro");
-    printf("Número exemplar do livro");
+    printf("\n\nAlterar estoque do livro\n\n");
+    printf("Digite o número exemplar do livro: ");
     scanf("%d", &etqAlt);
     posicao = procura_Livro(etqAlt);
 
@@ -217,17 +230,17 @@ void listarLivros() {
         printf("\nLivro não encontrado!\a");
     }
     else{
-      mostre(posicao);
+      mostrarLivro(posicao);
       printf("\n\nAlterar o estoque do livro(1-sim/0-não)? ");
       scanf("%d", &conf);
 
       if(conf == 1){
         printf("\nNovo estoque: ");
-        scanf("%f", &dados_livro.estoque);
+        scanf("%d", &dados_livro.estoque);
         printf("\nEstoque alterado com sucesso!\n\n");
         fseek(arquivo, posicao*sizeof(Ficha_Catalografica), SEEK_SET);
         fwrite(&dados_livro,sizeof(Ficha_Catalografica), 1, arquivo);
-        mostre(posicao);
+        mostrarLivro(posicao);
         printf("\nEstoque do livro alterado com sucesso!\n");
       }
       else{
@@ -239,7 +252,7 @@ void listarLivros() {
     scanf("%d", &resp);
 
   } while (resp == 1);
-}*/
+}
 
 int main(){
     int escolha;
@@ -251,6 +264,7 @@ int main(){
         printf(" Digite 2 para: Remover um livro \n\n");
         printf(" Digite 3 para: Consultar um livro pelo número exemplar \n\n"); //acredito que seja pelo ID 
         printf(" Digite 4 para: Ver os livros cadastrados no sistema \n\n");
+        printf("Digite 5 para: Alterar o estoque do livro \n\n");
         printf(" Digite -1 para: Sair\n\n");
 
         scanf("%d", &escolha);
@@ -267,6 +281,9 @@ int main(){
               break;
             case 4:
               listarLivros();
+              break;
+          case 5:
+              alterar_livro();
               break;
             case -1:
               fclose(arquivo);
