@@ -212,10 +212,6 @@ void listarLivros() {
     }
 }
 
-
-//void alterar(int estoque){ // alterar o estoque
-
-//}
 void alterar_livro() // alterar o estoque 
 {
   int etqAlt, conf, resp, posicao;
