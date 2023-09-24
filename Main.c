@@ -39,7 +39,7 @@ void cadastrar_o_livro() {
   int x;
   do
   {
-    printf("--CADASTRO DE LIVRO--");
+    printf("--CADASTRO DE LIVRO--\n");
     /*printf("Digite o nome do autor: ");
     scanf("%s", &dados_livro.nome_do_autor);*/
 
