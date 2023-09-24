@@ -3,11 +3,11 @@
 
 //o conjunto desses dados vai direcionar o usuário até o livro na estante
 typedef struct{
-    char nome_do_autor[20];
+    char nome_do_autor[100];
     //char sobrenome_do_autor[20]; // p conciliar diante do problema do gets
-    char titulo_do_livro[20];
-    char local_de_publicacao[20]; //onde o livro foi publicado -lugar geográfico-
-    char editora_do_livro[20]; 
+    char titulo_do_livro[100];
+    char local_de_publicacao[100]; //onde o livro foi publicado -lugar geográfico-
+    char editora_do_livro[100]; 
     int ano_do_livro;
     int paginacao; // quantas páginas o livro tem
     int numero_de_exemplar_do_livro; // cada livro recebe um número de exemplar que é como se fosse a identidade dele
@@ -149,7 +149,6 @@ void consultar_livro(){
 }
 void remover_livro() {
     int numero_de_exemplar_do_livro, escolha, resp, posicao;
-    //Ficha_Catalografica livro_nulo;
     memset(&livro_null, 0, sizeof(Ficha_Catalografica)); // Inicializa a estrutura com zeros
 
     do {
@@ -161,7 +160,6 @@ void remover_livro() {
         if (posicao == -1) {
             printf("\nLivro não encontrado!\a");
         } else {
-            //listarLivros(arquivo); // Exibe o livro antes de remover
             mostrarLivro(posicao);
             printf("\n\nDeseja remover o livro (1-sim/0-não)? ");
             scanf("%d", &escolha);
@@ -183,9 +181,6 @@ void remover_livro() {
 void listarLivros() {
     int cont = 1;
     printf("Lista de Livros Cadastrados:\n");
-
-    // Variável temporária para ler os registros do arquivo
-    //Ficha_Catalografica livro_temp;
 
     // Voltar ao início do arquivo
     fseek(arquivo, 0, SEEK_SET);
